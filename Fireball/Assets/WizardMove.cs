@@ -18,16 +18,16 @@ public class WizardMove : MonoBehaviour
     {
         //Vector2 pos = Wizard.transform.position;
         Vector2 scale = Wizard.transform.localScale;
-        if (Input.GetKey(KeyCode.D)) {
-            Vector2 left = new Vector2((float) 0.25, 0);
+        if (Input.GetKey(KeyCode.A)) {
+            Vector2 left = new Vector2((float) -0.15, 0);
             rb.AddForce(left, ForceMode2D.Impulse);
             //pos.x = pos.x + 3 * Time.deltaTime;
             scale.x = (float) 0.5;
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.D))
         {
             //pos.x = pos.x - 3 * Time.deltaTime;
-            Vector2 right = new Vector2((float) -0.25, 0);
+            Vector2 right = new Vector2((float) 0.15, 0);
             rb.AddForce(right, ForceMode2D.Impulse);
             scale.x = (float) -0.5;
         }
