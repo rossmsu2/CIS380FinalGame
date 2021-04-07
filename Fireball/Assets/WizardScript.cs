@@ -44,9 +44,23 @@ public class WizardScript : MonoBehaviour
             //Wizard.transform.position.x = pos.x;
             scale.x = (float)0.5;
         }
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             ani.SetTrigger("attack");
+            if(scale.x < 0)
+            {
+                GameObject fireball = Instantiate(Resources.Load("fireballLeft")) as GameObject;
+                fireball.transform.position = new Vector3(Wizard.transform.position.x - 1, Wizard.transform.position.y + 1, Wizard.transform.position.z);
+                
+            }
+            else
+            {
+                GameObject fireball = Instantiate(Resources.Load("fireball")) as GameObject;
+                fireball.transform.position = new Vector3(Wizard.transform.position.x + 1, Wizard.transform.position.y + 1, Wizard.transform.position.z);
+                
+            }
+
+            
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
