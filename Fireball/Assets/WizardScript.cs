@@ -27,7 +27,7 @@ public class WizardScript : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             ani.SetTrigger("isRun");
-            Vector2 left = new Vector2((float)-0.08, 0);
+            Vector2 left = new Vector2((float)-32.0 * Time.deltaTime, 0);
             rb.AddForce(left, ForceMode2D.Impulse);
             //pos.x = pos.x + 3 * Time.deltaTime;
             //pos.x = pos.x + left.x * Time.deltaTime;
@@ -38,7 +38,7 @@ public class WizardScript : MonoBehaviour
         {
             ani.SetTrigger("isRun");
             //pos.x = pos.x - 3 * Time.deltaTime;
-            Vector2 right = new Vector2((float)0.08, 0);
+            Vector2 right = new Vector2((float)32.0 * Time.deltaTime, 0);
             rb.AddForce(right, ForceMode2D.Impulse);
             //pos.x = pos.x + right.x * Time.deltaTime;
             //Wizard.transform.position.x = pos.x;
@@ -66,7 +66,7 @@ public class WizardScript : MonoBehaviour
         {
             if(Mathf.Abs(rb.velocity.y) <= .5)
             {
-                Vector2 up = new Vector2(0, 15f);
+                Vector2 up = new Vector2(0, 750f * Time.deltaTime);
                 rb.AddForce(up, ForceMode2D.Impulse);
             }
             

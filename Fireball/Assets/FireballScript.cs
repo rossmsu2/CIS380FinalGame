@@ -9,7 +9,7 @@ public class FireballScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(4.0f, 0.0f);
+        rb.velocity = new Vector2(160.0f * Time.deltaTime, 0.0f);
     }
 
     // Update is called once per frame
