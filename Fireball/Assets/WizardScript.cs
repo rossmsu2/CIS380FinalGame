@@ -66,7 +66,7 @@ public class WizardScript : MonoBehaviour
         {
             if(Mathf.Abs(rb.velocity.y) <= .5)
             {
-                Vector2 up = new Vector2(0, 750f * Time.deltaTime);
+                Vector2 up = new Vector2(0, 15f);
                 rb.AddForce(up, ForceMode2D.Impulse);
             }
             
