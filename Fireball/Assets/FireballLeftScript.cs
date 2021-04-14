@@ -5,16 +5,35 @@ using UnityEngine;
 public class FireballLeftScript : MonoBehaviour
 {
     Rigidbody2D rb;
+    Collider2D col;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(-160.0f * Time.deltaTime, 0.0f);
+        Vector2 movement = new Vector2(-5.0f, 0);
+        rb.AddForce(movement, ForceMode2D.Impulse);
+        col = GetComponent<Collider2D>();
+        Destroy(gameObject, 5.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "Zombie_Normal")
+        {
+            transform.SetParent(collision.gameObject.transform);
+            //Destroy(gameObject);
+            Destroy(collision.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

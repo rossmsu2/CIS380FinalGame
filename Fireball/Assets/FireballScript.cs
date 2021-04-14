@@ -26,7 +26,6 @@ public class FireballScript : MonoBehaviour
         if (collision.gameObject.name == "Zombie_Normal")
         {
             transform.SetParent(collision.gameObject.transform);
-            //Destroy(gameObject);
             Destroy(collision.gameObject);
         }
         else {

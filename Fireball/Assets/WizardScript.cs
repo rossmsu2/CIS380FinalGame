@@ -6,12 +6,14 @@ public class WizardScript : MonoBehaviour
 {
     GameObject Wizard;
     Rigidbody2D rb;
+    Collider2D col;
     Animator ani;
     // Start is called before the first frame update
     void Start()
     {
         Wizard = GameObject.Find("Wizard");
         rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
         ani = GetComponent<Animator>();
     }
 
@@ -66,12 +68,29 @@ public class WizardScript : MonoBehaviour
         {
             if(Mathf.Abs(rb.velocity.y) <= .5)
             {
-                Vector2 up = new Vector2(0, 15f);
+                Vector2 up = new Vector2(0, 1400f * Time.deltaTime);
                 rb.AddForce(up, ForceMode2D.Impulse);
             }
             
         }
         //Wizard.transform.position = pos;
         Wizard.transform.localScale = scale;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "Zombie_Normal")
+        {
+            HealthPot.health -= 1;
+            if (HealthPot.health > 0)
+            {
+                ani.SetTrigger("hurt");
+                Vector2 up = new Vector2(0, 2500f * Time.deltaTime);
+                rb.AddForce(up, ForceMode2D.Impulse);
+            }
+            else {
+                ani.SetTrigger("die");
+            }
+        }
     }
 }
