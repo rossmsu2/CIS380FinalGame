@@ -6,14 +6,23 @@ public class FireballScript : MonoBehaviour
 {
     Rigidbody2D rb;
     Collider2D col;
+    GameObject Wizard;
+    GameObject[] Balls;
     // Start is called before the first frame update
     void Start()
     {
+        Wizard = GameObject.Find("Wizard");
+        Balls = GameObject.FindGameObjectsWithTag("FireBall");
         rb = GetComponent<Rigidbody2D>();
         Vector2 movement = new Vector2(5.0f, 0);
         rb.AddForce(movement, ForceMode2D.Impulse);
         col = GetComponent<Collider2D>();
-        Destroy(gameObject, 5.0f);
+        InvokeRepeating("Remove", 5.0f, 5.0f);
+        Physics2D.IgnoreCollision(Wizard.GetComponent<Collider2D>(), col);
+        foreach(GameObject ball in Balls)
+        {
+            Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), col);
+        }
     }
 
     // Update is called once per frame
@@ -35,5 +44,11 @@ public class FireballScript : MonoBehaviour
             Destroy(gameObject);
             ManaPot.mana += 1;
         }
+    }
+
+    void Remove()
+    {
+        Destroy(gameObject);
+        ManaPot.mana += 1;
     }
 }

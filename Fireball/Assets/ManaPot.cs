@@ -16,7 +16,7 @@ public class ManaPot : MonoBehaviour
         wizard = GameObject.Find("Wizard");
         potion = GameObject.Find("ManaPot");
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        mana = 5;
+        mana = 3;
     }
 
     // Update is called once per frame

@@ -8,6 +8,7 @@ public class WizardScript : MonoBehaviour
     Rigidbody2D rb;
     Collider2D col;
     Animator ani;
+    public static bool InputEnabled = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,53 +27,68 @@ public class WizardScript : MonoBehaviour
         float jumping_magnitude = Mathf.Abs(rb.velocity.y);
         ani.SetFloat("speed", velocity_magnitude);
         ani.SetFloat("jump", jumping_magnitude);
-        if (Input.GetKey(KeyCode.A))
+
+
+        if(InputEnabled == true)
         {
-            ani.SetTrigger("isRun");
-            Vector2 left = new Vector2((float)-32.0 * Time.deltaTime, 0);
-            rb.AddForce(left, ForceMode2D.Impulse);
-            scale.x = (float)-0.5;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            ani.SetTrigger("isRun");
-            Vector2 right = new Vector2((float)32.0 * Time.deltaTime, 0);
-            rb.AddForce(right, ForceMode2D.Impulse);
-            scale.x = (float)0.5;
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (scale.x < 0)
+            if (Input.GetKey(KeyCode.A))
             {
-                if (ManaPot.mana > 0)
+                ani.SetTrigger("isRun");
+                Vector2 left = new Vector2((float)-32.0 * Time.deltaTime, 0);
+                rb.AddForce(left, ForceMode2D.Impulse);
+                scale.x = (float)-0.5;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                ani.SetTrigger("isRun");
+                Vector2 right = new Vector2((float)32.0 * Time.deltaTime, 0);
+                rb.AddForce(right, ForceMode2D.Impulse);
+                scale.x = (float)0.5;
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                ani.SetTrigger("attack");
+                if (scale.x < 0)
                 {
-                    ani.SetTrigger("attack");
-                    GameObject fireball = Instantiate(Resources.Load("fireballLeft")) as GameObject;
-                    fireball.transform.position = new Vector3(Wizard.transform.position.x - 1, Wizard.transform.position.y + 1, Wizard.transform.position.z);
-                    ManaPot.mana -= 1;
+                    if (ManaPot.mana > 0)
+                    {
+                        
+                        GameObject fireball = Instantiate(Resources.Load("fireballLeft")) as GameObject;
+                        fireball.transform.position = new Vector3(Wizard.transform.position.x - 1, Wizard.transform.position.y + 1, Wizard.transform.position.z);
+                        ManaPot.mana -= 1;
+                    }
                 }
-            }
-            else
-            {
-                if (ManaPot.mana > 0)
+                else
                 {
-                    ani.SetTrigger("attack");
-                    GameObject fireball = Instantiate(Resources.Load("fireball")) as GameObject;
-                    fireball.transform.position = new Vector3(Wizard.transform.position.x + 1, Wizard.transform.position.y + 1, Wizard.transform.position.z);
-                    ManaPot.mana -= 1;
+                    if (ManaPot.mana > 0)
+                    {
+                        
+                        GameObject fireball = Instantiate(Resources.Load("fireball")) as GameObject;
+                        fireball.transform.position = new Vector3(Wizard.transform.position.x + 1, Wizard.transform.position.y + 1, Wizard.transform.position.z);
+                        ManaPot.mana -= 1;
+                    }
                 }
+
+
             }
-
-
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (Mathf.Abs(rb.velocity.y) <= .5)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                Vector2 up = new Vector2(0, 1400f * Time.deltaTime);
-                rb.AddForce(up, ForceMode2D.Impulse);
-            }
+                if (Mathf.Abs(rb.velocity.y) <= .5)
+                {
+                    float jump = 16f;
+                    //Vector2 up = new Vector2(0, 1400f * Time.deltaTime);
+                    //rb.AddForce(up, ForceMode2D.Impulse);
+                    rb.velocity = Vector2.up * jump + rb.velocity;
+                }
 
+            }
+        }
+        
+
+        if(Wizard.transform.position.x >= 295)
+        {
+           ani.SetTrigger("lookUp");
+           InputEnabled = false; 
         }
         Wizard.transform.localScale = scale;
     }
@@ -81,16 +97,18 @@ public class WizardScript : MonoBehaviour
     {
         if (collision.gameObject.name == "Zombie_Normal")
         {
-            HealthPot.health -= 1;
-            if (HealthPot.health > 0)
+            
+            if (HealthPot.health > 1)
             {
                 ani.SetTrigger("hurt");
-                Vector2 up = new Vector2(0, 2500f * Time.deltaTime);
+                Vector2 up = new Vector2(0, 50f);
                 rb.AddForce(up, ForceMode2D.Impulse);
+                HealthPot.health -= 1;
             }
             else
             {
                 ani.SetTrigger("die");
+                InputEnabled = false;
             }
         }
     }

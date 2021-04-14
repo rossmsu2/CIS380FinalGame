@@ -19,6 +19,7 @@ public class CameraController : MonoBehaviour
     {
         wizardPos = wizard.transform.position;
         wizardPos.z = -10;
+        wizardPos.y = wizardPos.y + 1;
         camera.transform.position = wizardPos;
     }
 }
