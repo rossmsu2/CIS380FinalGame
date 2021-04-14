@@ -22,14 +22,18 @@ public class FireballScript : MonoBehaviour
 
     }
 
-    void OnCollisionEnter2D(Collision2D collision) {
+    void OnCollisionEnter2D(Collision2D collision)
+    {
         if (collision.gameObject.name == "Zombie_Normal")
         {
             transform.SetParent(collision.gameObject.transform);
             Destroy(collision.gameObject);
+            ManaPot.mana += 1;
         }
-        else {
+        else
+        {
             Destroy(gameObject);
+            ManaPot.mana += 1;
         }
     }
 }

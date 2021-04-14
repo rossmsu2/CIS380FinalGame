@@ -20,7 +20,7 @@ public class FireballLeftScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -28,12 +28,13 @@ public class FireballLeftScript : MonoBehaviour
         if (collision.gameObject.name == "Zombie_Normal")
         {
             transform.SetParent(collision.gameObject.transform);
-            //Destroy(gameObject);
             Destroy(collision.gameObject);
+            ManaPot.mana += 1;
         }
         else
         {
             Destroy(gameObject);
+            ManaPot.mana += 1;
         }
     }
 }
