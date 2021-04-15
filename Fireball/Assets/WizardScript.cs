@@ -57,6 +57,11 @@ public class WizardScript : MonoBehaviour
                         fireball.transform.position = new Vector3(Wizard.transform.position.x - 1, Wizard.transform.position.y + 1, Wizard.transform.position.z);
                         ManaPot.mana -= 1;
                     }
+                    else
+                    {
+                        GameObject smoke = Instantiate(Resources.Load("SmokePuff")) as GameObject;
+                        smoke.transform.position = new Vector3(Wizard.transform.position.x - 1, Wizard.transform.position.y + 1, Wizard.transform.position.z);
+                    }
                 }
                 else
                 {
@@ -66,6 +71,11 @@ public class WizardScript : MonoBehaviour
                         GameObject fireball = Instantiate(Resources.Load("fireball")) as GameObject;
                         fireball.transform.position = new Vector3(Wizard.transform.position.x + 1, Wizard.transform.position.y + 1, Wizard.transform.position.z);
                         ManaPot.mana -= 1;
+                    }
+                    else
+                    {
+                        GameObject smoke = Instantiate(Resources.Load("SmokePuff")) as GameObject;
+                        smoke.transform.position = new Vector3(Wizard.transform.position.x + 1, Wizard.transform.position.y + 1, Wizard.transform.position.z);
                     }
                 }
 
