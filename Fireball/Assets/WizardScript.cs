@@ -95,7 +95,7 @@ public class WizardScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Zombie_Normal")
+        if (collision.gameObject.tag == "Zombie")
         {
             
             if (HealthPot.health > 1)

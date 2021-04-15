@@ -9,6 +9,9 @@ public class ZombieScript : MonoBehaviour
     Rigidbody2D rb;
     Animator ani;
     // Start is called before the first frame update
+
+    public bool dead;
+
     void Start()
     {
         Wizard = GameObject.Find("Wizard");
@@ -23,20 +26,36 @@ public class ZombieScript : MonoBehaviour
         Vector2 pos = Zombie.transform.position;
         Vector2 scale = Zombie.transform.localScale;
         float velocity_magnitude = Mathf.Abs(rb.velocity.x);
+        float distance = Mathf.Abs(Wizard.transform.position.x - transform.position.x);
         ani.SetFloat("Speed", velocity_magnitude);
-        if(Wizard.transform.position.x + .1 > Zombie.transform.position.x)
+        ani.SetFloat("Dist", distance);
+        if(Wizard.transform.position.x + .1 > transform.position.x)
         {
             Vector2 right = new Vector2((float)12.0 * Time.deltaTime, 0);
             rb.AddForce(right, ForceMode2D.Impulse);
             scale.x = (float)0.4;
         }
-        else if(Wizard.transform.position.x < Zombie.transform.position.x + .1)
+        else if(Wizard.transform.position.x < transform.position.x + .1)
         {
             Vector2 left = new Vector2((float)-12.0 * Time.deltaTime, 0);
             rb.AddForce(left, ForceMode2D.Impulse);
             scale.x = (float)-0.4;
         }
+        if(transform.position.y < -30)
+        {
+            Destroy(gameObject);
+        }
+        if(dead == true)
+        {
+            ani.SetTrigger("die");
+            InvokeRepeating("Remove", 1.0f, 1.0f);
+        }
         
-        Zombie.transform.localScale = scale;
+        transform.localScale = scale;
+    }
+
+    void Remove()
+    {
+        Destroy(gameObject);
     }
 }

@@ -33,11 +33,13 @@ public class FireballScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Zombie_Normal")
+        if (collision.gameObject.tag == "Zombie")
         {
             transform.SetParent(collision.gameObject.transform);
-            Destroy(collision.gameObject);
-            ManaPot.mana += 1;
+            Destroy(collision.gameObject.GetComponent<BoxCollider2D>());
+            collision.gameObject.GetComponent<ZombieScript>().dead = true;
+            Remove();
+            
         }
         else
         {
