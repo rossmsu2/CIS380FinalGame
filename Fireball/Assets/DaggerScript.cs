@@ -38,4 +38,9 @@ public class DaggerScript : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    void Remove()
+    {
+        Destroy(gameObject);
+    }
 }

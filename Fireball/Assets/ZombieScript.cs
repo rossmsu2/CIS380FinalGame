@@ -6,8 +6,10 @@ public class ZombieScript : MonoBehaviour
 {
     GameObject Wizard;
     GameObject Zombie;
+    Collider2D col;
     Rigidbody2D rb;
     Animator ani;
+    GameObject[] zombies;
     // Start is called before the first frame update
 
     public bool dead;
@@ -16,13 +18,23 @@ public class ZombieScript : MonoBehaviour
     {
         Wizard = GameObject.Find("Wizard");
         Zombie = GameObject.Find("Zombie_Normal");
+        zombies = GameObject.FindGameObjectsWithTag("Zombie");
+        col = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
+        
+        foreach (GameObject zombie in zombies)
+        {
+            Physics2D.IgnoreCollision(zombie.GetComponent<Collider2D>(), col);
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+
         Vector2 pos = Zombie.transform.position;
         Vector2 scale = Zombie.transform.localScale;
         float velocity_magnitude = Mathf.Abs(rb.velocity.x);
@@ -47,6 +59,7 @@ public class ZombieScript : MonoBehaviour
         }
         if(dead == true)
         {
+            Destroy(gameObject.GetComponent<BoxCollider2D>());
             ani.SetTrigger("die");
             InvokeRepeating("Remove", 1.0f, 1.0f);
         }

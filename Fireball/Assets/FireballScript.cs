@@ -35,8 +35,8 @@ public class FireballScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Zombie")
         {
-            transform.SetParent(collision.gameObject.transform);
-            Destroy(collision.gameObject.GetComponent<BoxCollider2D>());
+            
+            
             collision.gameObject.GetComponent<ZombieScript>().dead = true;
             Remove();
         }
@@ -63,6 +63,10 @@ public class FireballScript : MonoBehaviour
     void Remove()
     {
         Destroy(gameObject);
-        ManaPot.mana += 1;
+        if(ManaPot.mana < 5)
+        {
+            ManaPot.mana += 1;
+        }
+        
     }
 }

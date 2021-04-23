@@ -5,6 +5,7 @@ using UnityEngine;
 public class ZombieSpawner : MonoBehaviour
 {
     GameObject wizard;
+    GameObject[] zombies;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +15,8 @@ public class ZombieSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Random.Range(0.0f, 1000.0f) < 3.0f && wizard.transform.position.x < 250)
+        zombies = GameObject.FindGameObjectsWithTag("Zombie");
+        if (Random.Range(0.0f, 1000.0f) < 3.0f && wizard.transform.position.x < 215 && zombies.Length < 35)
         {
             GameObject zombie = Instantiate(Resources.Load("Zombie_Normal")) as GameObject;
             zombie.transform.position =

@@ -294,6 +294,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e568597a50c97546aaa1b8dd11aee77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clip1: {fileID: 8300000, guid: 2aba10171ffa3824ba37be014c375c80, type: 3}
+  clip2: {fileID: 8300000, guid: 78c0659b25295f249ac8f0884dbecff3, type: 3}
+  clip3: {fileID: 8300000, guid: 3b00360bdc3033f48a2932c81767f75f, type: 3}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -753,6 +756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5be3802971d6d3d4b9010155a2b4f1a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dead: 0
 --- !u!1 &1212248644
 GameObject:
   m_ObjectHideFlags: 0
@@ -28350,6 +28354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e837125859cfb14ba8fb3128ca28b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  win: 0
 --- !u!61 &1731779608
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -122382,7 +122387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4261465905457267363, guid: e4009800c3ccd6142984fecea7818762, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 29.68
+      value: 30.02
       objectReference: {fileID: 0}
     - target: {fileID: 4261465905457267363, guid: e4009800c3ccd6142984fecea7818762, type: 3}
       propertyPath: m_LocalPosition.z

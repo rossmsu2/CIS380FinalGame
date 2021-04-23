@@ -9,6 +9,7 @@ public class WizardScript : MonoBehaviour
     Collider2D col;
     Animator ani;
     public static bool InputEnabled = true;
+    public bool win = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -95,10 +96,12 @@ public class WizardScript : MonoBehaviour
         }
         
 
-        if(Wizard.transform.position.x >= 295)
+        if(Wizard.transform.position.x >= 295 && win == false)
         {
            ani.SetTrigger("lookUp");
-           InputEnabled = false; 
+           InputEnabled = false;
+            InvokeRepeating("Win", 2.0f, 2.0f);
+            win = true;
         }
         Wizard.transform.localScale = scale;
     }
@@ -110,7 +113,7 @@ public class WizardScript : MonoBehaviour
             if (HealthPot.health > 1)
             {
                 ani.SetTrigger("hurt");
-                Vector2 up = new Vector2(0, 50f);
+                Vector2 up = new Vector2(0, 45f);
                 rb.AddForce(up, ForceMode2D.Impulse);
                 HealthPot.health -= 1;
             }
@@ -134,5 +137,40 @@ public class WizardScript : MonoBehaviour
                 InputEnabled = false;
             }
         }
+    }
+
+    void Win()
+    {
+        int direction = Random.Range(0, 2);
+        Vector2 scale = Wizard.transform.localScale;
+        if (direction == 0)
+        {
+            scale.x = (float)-0.5;
+        }
+        else if(direction == 1)
+        {
+            scale.x = (float)0.5;
+        }
+        int action = Random.Range(0, 3);
+        if(action == 0)
+        {
+            if (Mathf.Abs(rb.velocity.y) <= .5)
+            {
+                float jump = 16f;
+                rb.velocity = Vector2.up * jump + rb.velocity;
+            }
+        }
+        else if(action == 1)
+        {
+            ani.SetTrigger("attack");
+        }
+        else
+        {
+            ani.SetTrigger("lookUp");
+        }
+
+
+        Wizard.transform.localScale = scale;
+
     }
 }
