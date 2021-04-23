@@ -105,14 +105,27 @@ public class WizardScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Zombie")
+        if (collision.gameObject.tag == "Zombie" || collision.gameObject.tag == "Rogue")
         {
-            
             if (HealthPot.health > 1)
             {
                 ani.SetTrigger("hurt");
                 Vector2 up = new Vector2(0, 50f);
                 rb.AddForce(up, ForceMode2D.Impulse);
+                HealthPot.health -= 1;
+            }
+            else
+            {
+                ani.SetTrigger("die");
+                InputEnabled = false;
+            }
+        }
+        if (collision.gameObject.tag == "Dagger") {
+            if (HealthPot.health > 1)
+            {
+                ani.SetTrigger("hurt");
+                Vector2 back = new Vector2(-20f, 0);
+                rb.AddForce(back, ForceMode2D.Impulse);
                 HealthPot.health -= 1;
             }
             else

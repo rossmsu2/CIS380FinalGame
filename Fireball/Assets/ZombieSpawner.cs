@@ -18,7 +18,7 @@ public class ZombieSpawner : MonoBehaviour
         {
             GameObject zombie = Instantiate(Resources.Load("Zombie_Normal")) as GameObject;
             zombie.transform.position =
-                   new Vector3(Random.Range(wizard.transform.position.x + 17, 250), Random.Range(wizard.transform.position.y - 10, wizard.transform.position.y + 5), wizard.transform.position.z);
+                   new Vector3(Random.Range(wizard.transform.position.x + 17, 230), Random.Range(wizard.transform.position.y - 10, wizard.transform.position.y + 5), wizard.transform.position.z);
         }
     }
 }

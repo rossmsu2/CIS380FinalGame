@@ -40,10 +40,21 @@ public class FireballLeftScript : MonoBehaviour
             collision.gameObject.GetComponent<ZombieScript>().dead = true;
             Remove();
         }
+        else if (collision.gameObject.tag == "Rogue") {
+            if (RogueScript.health > 1)
+            {
+                RogueScript.health -= 1;
+                Remove();
+            }
+            else {
+                Destroy(collision.gameObject.GetComponent<BoxCollider2D>());
+                collision.gameObject.GetComponent<RogueScript>().dead = true;
+                Remove();
+            }
+        }
         else
         {
-            Destroy(gameObject);
-            ManaPot.mana += 1;
+            Remove();
         }
     }
 

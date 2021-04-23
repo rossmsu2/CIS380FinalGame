@@ -6,6 +6,8 @@ TagManager:
   tags:
   - FireBall
   - Zombie
+  - Rogue
+  - Dagger
   layers:
   - Default
   - TransparentFX
